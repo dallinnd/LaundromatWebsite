@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wash n Go</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: sans-serif; margin: 0; background: #f4f4f9; overflow-x: hidden; }
+        .step { height: 100vh; display: flex; align-items: center; padding: 0 10%; gap: 40px; }
+        
+        /* Zigzag structure */
+        .step:nth-child(even) { flex-direction: row-reverse; }
 
+        img { width: 200px; opacity: 0; transition: transform 1s ease-out, opacity 1s; }
+        .content { opacity: 0; transform: translateY(50px); transition: transform 1s ease-out, opacity 1s; }
+
+        /* Triggered Animations */
+        .step.visible img { opacity: 1; transform: translateX(0); }
+        .step.visible .content { opacity: 1; transform: translateY(0); }
+
+        /* Initial positions for slide-in */
+        .step:nth-child(odd) img { transform: translateX(-100px); }
+        .step:nth-child(even) img { transform: translateX(100px); }
+    </style>
+</head>
+<body>
+
+    <section class="step">
+        <img src="LaundroMatIconA.png" alt="Step 1">
+        <div class="content"><h2>BYOL</h2><p>Bring Your Own Laundry.</p></div>
+    </section>
+
+    <section class="step">
+        <img src="LaundroMatIconB.png" alt="Step 2">
+        <div class="content"><h2>Quick Rinse and Wash</h2><p>Pick your cycle and witness industrial speed.</p></div>
+    </section>
+
+    <section class="step">
+        <img src="LaundroMatIconC.png" alt="Step 3">
+        <div class="content"><h2>Dry for Free</h2><p>Use our washers? Dryer is free.</p></div>
+    </section>
+
+    <section class="step">
+        <img src="LaundroMatIconD.png" alt="Step 4">
+        <div class="content"><h2>Finish Strong with a Fold</h2><p>Roll the laundry cart to a table and start folding.</p></div>
+    </section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('visible'); 
+        });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.step').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
