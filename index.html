@@ -3,85 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wash n Go | Modern Laundry</title>
+    <title>Wash n Go</title>
     <link rel="manifest" href="manifest.json">
     <style>
         :root {
             --bg-dark: #121212;
-            --surface: #1e1e1e;
-            --accent-orange: #FF8C00;
-            --accent-faded: #ffa64d;
-            --accent-green: #00E676;
-            --text-main: #e0e0e0;
-            --text-dim: #a0a0a0;
+            --text-light: #e0e0e0;
+            --orange-vibrant: #ff8c00;
+            --green-accent: #39ff14;
         }
 
         body { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            margin: 0; background: var(--bg-dark); color: var(--text-main);
-            overflow-x: hidden; line-height: 1.6;
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; background-color: var(--bg-dark); 
+            color: var(--text-light); overflow-x: hidden;
         }
 
-        /* Container for Desktop constraints */
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
+        /* Hero Header */
+        header { padding: 80px 20px; text-align: center; }
+        header h1 { font-size: 3.5rem; color: var(--orange-vibrant); margin: 0; }
+
+        /* Tighter Steps */
         .step { 
-            min-height: 80vh; display: flex; align-items: center; 
-            gap: 60px; padding: 40px 0;
+            display: flex; align-items: center; justify-content: center; 
+            gap: 60px; padding: 60px 0; min-height: auto;
         }
-        
+
         .step:nth-child(even) { flex-direction: row-reverse; }
 
-        img { width: 300px; height: auto; opacity: 0; transition: all 1s ease-out; }
-        
-        .content { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; flex: 1; }
-        
-        h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent-orange); }
-        h2 span { color: var(--accent-green); } /* Green accent */
-        p { font-size: 1.2rem; color: var(--text-dim); }
+        img { 
+            width: 150px; opacity: 0; 
+            transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s; 
+        }
 
-        /* Animation Classes */
+        .content { 
+            opacity: 0; transform: translateY(30px); 
+            transition: transform 0.8s ease-out, opacity 0.8s; 
+            max-width: 400px;
+        }
+
+        h2 { color: var(--orange-vibrant); font-size: 2rem; margin: 0 0 10px 0; }
+        p { font-size: 1.1rem; line-height: 1.5; color: #bbb; }
+
         .step.visible img { opacity: 1; transform: translateX(0); }
         .step.visible .content { opacity: 1; transform: translateY(0); }
-        .step:nth-child(odd) img { transform: translateX(-100px); }
-        .step:nth-child(even) img { transform: translateX(100px); }
 
-        /* Responsive Mobile */
+        .step:nth-child(odd) img { transform: translateX(-50px); }
+        .step:nth-child(even) img { transform: translateX(50px); }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .step { flex-direction: column !important; text-align: center; gap: 20px; }
-            img { width: 150px; }
+            .step { flex-direction: column !important; text-align: center; gap: 20px; padding: 40px 0; }
+            img { width: 100px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <section class="step">
-        <img src="LaundroMatIconA.png" alt="Step 1">
-        <div class="content"><h2>BYOL <span>.</span></h2><p>Bring Your Own Laundry. Clean, modern space ready for your load.</p></div>
-    </section>
+    <header>
+        <h1>Wash n Go</h1>
+    </header>
 
-    <section class="step">
-        <img src="LaundroMatIconB.png" alt="Step 2">
-        <div class="content"><h2>Quick Rinse <span>& Wash</span></h2><p>Pick your cycle and witness industrial speed cleaning.</p></div>
-    </section>
+    <div class="container">
+        <section class="step">
+            <img src="LaundroMatIconA.png" alt="Step 1">
+            <div class="content"><h2>BYOL</h2><p>Bring Your Own Laundry.</p></div>
+        </section>
 
-    <section class="step">
-        <img src="LaundroMatIconC.png" alt="Step 3">
-        <div class="content"><h2>Dry <span>for Free</span></h2><p>Use our high-efficiency washers? The dryer is on us.</p></div>
-    </section>
+        <section class="step">
+            <img src="LaundroMatIconB.png" alt="Step 2">
+            <div class="content"><h2>Quick Rinse and Wash</h2><p>Pick your cycle and witness industrial speed.</p></div>
+        </section>
 
-    <section class="step">
-        <img src="LaundroMatIconD.png" alt="Step 4">
-        <div class="content"><h2>Finish <span>Strong</span></h2><p>Roll the laundry cart to a folding table and get it done.</p></div>
-    </section>
-</div>
+        <section class="step">
+            <img src="LaundroMatIconC.png" alt="Step 3">
+            <div class="content"><h2>Dry for Free</h2><p>Use our washers? Dryer is free.</p></div>
+        </section>
+
+        <section class="step">
+            <img src="LaundroMatIconD.png" alt="Step 4">
+            <div class="content"><h2 style="color: var(--green-accent);">Finish Strong</h2><p>Roll the laundry cart to a table and start folding.</p></div>
+        </section>
+    </div>
 
 <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { 
-            if (entry.isIntersecting) entry.target.classList.add('visible'); 
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.2 });
     document.querySelectorAll('.step').forEach(s => observer.observe(s));
 </script>
