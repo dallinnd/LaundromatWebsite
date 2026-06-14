@@ -3,55 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wash n Go</title>
+    <title>Wash n Go | Modern Laundry</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        body { font-family: sans-serif; margin: 0; background: #f4f4f9; overflow-x: hidden; }
-        .step { height: 100vh; display: flex; align-items: center; padding: 0 10%; gap: 40px; }
+        :root {
+            --bg-dark: #121212;
+            --surface: #1e1e1e;
+            --accent-orange: #FF8C00;
+            --accent-faded: #ffa64d;
+            --accent-green: #00E676;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+        }
+
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
+            margin: 0; background: var(--bg-dark); color: var(--text-main);
+            overflow-x: hidden; line-height: 1.6;
+        }
+
+        /* Container for Desktop constraints */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        .step { 
+            min-height: 80vh; display: flex; align-items: center; 
+            gap: 60px; padding: 40px 0;
+        }
         
-        /* Zigzag structure */
         .step:nth-child(even) { flex-direction: row-reverse; }
 
-        img { width: 200px; opacity: 0; transition: transform 1s ease-out, opacity 1s; }
-        .content { opacity: 0; transform: translateY(50px); transition: transform 1s ease-out, opacity 1s; }
+        img { width: 300px; height: auto; opacity: 0; transition: all 1s ease-out; }
+        
+        .content { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; flex: 1; }
+        
+        h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent-orange); }
+        h2 span { color: var(--accent-green); } /* Green accent */
+        p { font-size: 1.2rem; color: var(--text-dim); }
 
-        /* Triggered Animations */
+        /* Animation Classes */
         .step.visible img { opacity: 1; transform: translateX(0); }
         .step.visible .content { opacity: 1; transform: translateY(0); }
-
-        /* Initial positions for slide-in */
         .step:nth-child(odd) img { transform: translateX(-100px); }
         .step:nth-child(even) img { transform: translateX(100px); }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .step { flex-direction: column !important; text-align: center; gap: 20px; }
+            img { width: 150px; }
+        }
     </style>
 </head>
 <body>
 
+<div class="container">
     <section class="step">
         <img src="LaundroMatIconA.png" alt="Step 1">
-        <div class="content"><h2>BYOL</h2><p>Bring Your Own Laundry.</p></div>
+        <div class="content"><h2>BYOL <span>.</span></h2><p>Bring Your Own Laundry. Clean, modern space ready for your load.</p></div>
     </section>
 
     <section class="step">
         <img src="LaundroMatIconB.png" alt="Step 2">
-        <div class="content"><h2>Quick Rinse and Wash</h2><p>Pick your cycle and witness industrial speed.</p></div>
+        <div class="content"><h2>Quick Rinse <span>& Wash</span></h2><p>Pick your cycle and witness industrial speed cleaning.</p></div>
     </section>
 
     <section class="step">
         <img src="LaundroMatIconC.png" alt="Step 3">
-        <div class="content"><h2>Dry for Free</h2><p>Use our washers? Dryer is free.</p></div>
+        <div class="content"><h2>Dry <span>for Free</span></h2><p>Use our high-efficiency washers? The dryer is on us.</p></div>
     </section>
 
     <section class="step">
         <img src="LaundroMatIconD.png" alt="Step 4">
-        <div class="content"><h2>Finish Strong with a Fold</h2><p>Roll the laundry cart to a table and start folding.</p></div>
+        <div class="content"><h2>Finish <span>Strong</span></h2><p>Roll the laundry cart to a folding table and get it done.</p></div>
     </section>
+</div>
 
 <script>
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { 
             if (entry.isIntersecting) entry.target.classList.add('visible'); 
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
     document.querySelectorAll('.step').forEach(s => observer.observe(s));
 </script>
 </body>
